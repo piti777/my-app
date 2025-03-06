@@ -32,14 +32,12 @@ export const fetchApi = async <T>(
     let url: any;
     if (populate) {
         let queryParams: any = {};
-        queryParams = populate;
+        queryParams.populate = populate;
         if (filters) {
           queryParams.filters = filters;
         }
         const newUrl = new URL(path, process.env.API_URL);
-        newUrl.search = qs.stringify({
-          populate: queryParams
-        });
+        newUrl.search = qs.stringify(queryParams);
         url = newUrl;
       } else {
         url = `${process.env.API_URL}${path}`;
